@@ -1,7 +1,7 @@
 <?php
 // solicitudes.php: VISTA. Lista las solicitudes guardadas y permite editarlas o eliminarlas
 // Variables del controlador: $solicitudes, $editando, $categorias
-require 'encabezado.php';
+require __DIR__ . '/encabezado.php';
 ?>
 
 <section class="container seccion">
@@ -11,7 +11,7 @@ require 'encabezado.php';
   <?php if ($editando): ?>
     <div class="contacto mb-5" data-aos="fade-up">
       <h5 class="mb-3">Edit request #<?= $editando['id'] ?></h5>
-      <?php require 'formulario.php'; ?>
+      <?php require __DIR__ . '/formulario.php'; ?>
     </div>
   <?php endif; ?>
 
@@ -51,4 +51,4 @@ require 'encabezado.php';
   </div>
 </section>
 
-<?php require 'pie.php'; ?>
+<?php require __DIR__ . '/pie.php'; ?>

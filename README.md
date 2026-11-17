@@ -9,16 +9,19 @@ Proyecto de Desarrollo web y móvil.
 - Bootstrap 5
 - Swiper (carrusel) y AOS (animaciones)
 
-## Estructura
+## Estructura (MVC)
 ```
 business-alliance/
-├── index.php            controlador
-├── conexion.php         datos de la base de datos
-├── modelo/modelo.php    modelo (consultas SQL)
-├── vistas/              vistas (HTML)
+├── index.php                          punto de entrada: llama al controlador que corresponde
+├── conexion.php                       datos de la base de datos
+├── controllers/
+│   ├── HomeController.php             CONTROLADOR de la página de inicio
+│   └── SolicitudController.php        CONTROLADOR del CRUD de solicitudes
+├── modelo/modelo.php                  MODELO (consultas SQL)
+├── vistas/                            VISTAS (HTML)
 ├── css/  js/  img/
-├── libs/aos/            librería AOS instalada
-└── base_datos/business_alliance.sql
+├── libs/aos/                          librería AOS instalada
+└── base_datos/business_alliance.sql   exportado desde phpMyAdmin
 ```
 
 ## Cómo correrlo en XAMPP

@@ -1,6 +1,6 @@
 <?php
 // gracias.php: VISTA. Página de confirmación después de enviar el formulario
-require 'encabezado.php';
+require __DIR__ . '/encabezado.php';
 ?>
 
 <section class="container gracias">
@@ -16,4 +16,4 @@ require 'encabezado.php';
   </div>
 </section>
 
-<?php require 'pie.php'; ?>
+<?php require __DIR__ . '/pie.php'; ?>

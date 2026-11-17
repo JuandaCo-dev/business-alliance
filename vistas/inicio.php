@@ -1,7 +1,7 @@
 <?php
 // inicio.php: VISTA. Solo HTML; usa las variables que le pasa el controlador:
 // $categorias, $propiedades, $categoria
-require 'encabezado.php';
+require __DIR__ . '/encabezado.php';
 ?>
 
 <!-- SECCIÓN 2: Portada -->
@@ -189,11 +189,11 @@ require 'encabezado.php';
       <div class="col-12 col-lg-7">
         <?php
           $editando = null;      // en el inicio el formulario siempre crea
-          require 'formulario.php';
+          require __DIR__ . '/formulario.php';
         ?>
       </div>
     </div>
   </div>
 </section>
 
-<?php require 'pie.php'; ?>
+<?php require __DIR__ . '/pie.php'; ?>

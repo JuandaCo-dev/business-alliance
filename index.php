@@ -1,49 +1,32 @@
 <?php
-// index.php: CONTROLADOR. Recibe la petición, le pide datos al modelo
-// y le pasa el resultado a la vista.
-require 'modelo/modelo.php';   // <-- aquí entra el MODELO
+// index.php: punto de entrada. Revisa qué se pidió (GET o POST)
+// y llama al CONTROLADOR que corresponde.
+require_once 'controllers/HomeController.php';
+require_once 'controllers/SolicitudController.php';
 
-// 1. POST: crear, actualizar o eliminar una solicitud
+$homeController      = new HomeController();
+$solicitudController = new SolicitudController();
+
+// Peticiones POST: vienen del formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $accion = $_POST['accion'];
-
-    if ($accion === 'crear') {
-        crearSolicitud($conexion, $_POST);
-        header('Location: index.php?pagina=gracias&tipo=creado');
-        exit;
-    }
-    if ($accion === 'actualizar') {
-        actualizarSolicitud($conexion, $_POST);
-        header('Location: index.php?pagina=gracias&tipo=actualizado');
-        exit;
-    }
-    if ($accion === 'eliminar') {
-        eliminarSolicitud($conexion, $_POST['id']);
-        header('Location: index.php?pagina=solicitudes');
-        exit;
+    if ($_POST['accion'] === 'eliminar') {
+        $solicitudController->eliminar();
+    } else {
+        $solicitudController->guardar();   // crear o actualizar
     }
 }
 
-$pagina     = $_GET['pagina'] ?? 'inicio';
-$categorias = listarCategorias($conexion);
+// Peticiones GET
+$pagina = $_GET['pagina'] ?? 'inicio';
 
-// 2. GET: página de gracias después de enviar el formulario
-if ($pagina === 'gracias') {
-    $tipo = $_GET['tipo'] ?? 'creado';
-    require 'vistas/gracias.php';   // <-- aquí entra la VISTA
-    exit;
+switch ($pagina) {
+    case 'gracias':
+        $solicitudController->gracias();
+        break;
+    case 'solicitudes':
+        $solicitudController->index();
+        break;
+    default:
+        $homeController->index();
+        break;
 }
-
-// 3. GET: panel de solicitudes (listar, editar y eliminar)
-if ($pagina === 'solicitudes') {
-    $solicitudes = listarSolicitudes($conexion);
-    $editando    = isset($_GET['editar']) ? buscarSolicitud($conexion, $_GET['editar']) : null;
-    require 'vistas/solicitudes.php';
-    exit;
-}
-
-// 4. GET: página de inicio, con filtro de propiedades por categoría
-$categoria   = $_GET['categoria'] ?? null;
-$propiedades = listarPropiedades($conexion, $categoria);
-
-require 'vistas/inicio.php';
